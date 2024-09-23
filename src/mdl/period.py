@@ -13,7 +13,7 @@ class HolidayPeriod:
         return self.__start_date
 
     def end_date(self) -> date:
-        return self.__start_date + timedelta(days=self.__duration)
+        return self.__start_date + timedelta(days=self.__duration - 1)
 
     def duration(self) -> int:
         return self.__duration
@@ -22,7 +22,10 @@ class HolidayPeriod:
         return self.start_date() <= datestamp <= self.end_date()
 
     def all_days(self) -> list[date]:
-        return [self.start_date() + timedelta(days=i) for i in range(self.duration())]
+        all_days = []
+        for i in range(self.duration()):
+            all_days.append(self.start_date() + timedelta(days=i))
+        return all_days
 
     def __str__(self) -> str:
         return f'{self.start_date()} - {self.end_date()}'
