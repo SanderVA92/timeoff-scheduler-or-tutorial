@@ -2,3 +2,4 @@ PuLP >= 2.9.0
 pandas >= 2.2.2
 calplot >= 0.1.7.5
 matplotlib >= 3.9.2
+plotly >= 5.22.0
