@@ -5,8 +5,9 @@ This repository accompanies a workshop on Operations Research problem solving us
 This repository contains
 - [datasets](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/datasets) with the public holidays for Berlin and Munich
 - some code to aid in implementation, focus on [domain modelling](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/mdl) and [visualization](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/plotting)
-- Jupyter notebooks with [some preparation to implement the model](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/notebooks/tutorial.ipynb) independently, and a [completely implemented solution](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/notebooks/tutorial-solution.ipynb)
-  - Note that the "empty" notebook already contains quite some snippets and focusses on the actual optimization model implementation, i.e. creating variables and using those to define the objective function and constraints.
+- Jupyter notebook with [completely implemented version](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/notebooks/tutorial-demo.ipynb) which you can browse independently.
+   - Changing the model configuration, e.g. preferences and bonus preferrences is possible in the configuration file  (`src/config.py`)
+   - Want to change the cost and/or utility calculation? Check `src/utils/calculators.py`
 
 ## Case study
 
@@ -64,13 +65,22 @@ $B$: holiday budget, e.g. we can take 30 days off on a yearly basis
 ### Optimization model
 #### Objective function
 
-$\max \sum_{p \in P}{u_{d,l} * p_{d, l}}$
+$\max \sum_{(d, l) \in P}{u_{d,l} * p_{d, l}}$
 
 #### Constraint 1: holiday budget
 
-$\sum_{p \in P}{c_{d,l} * p_{d,l}} \leq B$
+$\sum_{(d, l) \in P}{c_{d,l} * p_{d,l}} \leq B$
 
 #### Constraint 2: single-day coverage
 We can only get the value of a specific day once, and hence it does not make sense to have two periods which cover a specific date. To model this, we can add a constraint for each day $d$ in the year (or more generic: the planning period) and enforce that at most one period containing that date can be selected.
 
-$\sum_{p \in P_{\delta}}{p_{d,l}} \leq 1$
+$\sum_{(d, l) \in P_{\delta}}{x_{d,l}} \leq 1$
+
+#### [optional] Constraint 3: longer period required
+To illustrate that we can extend the model with additional constraints to come closer to our own preferences, a third constraint states that we should have at least one period with $M$ consecutive days off. 
+
+Set $P^{\geq M}$ represents all periods $p_{d, l}: l \geq M$. Then we can add the following constraint:
+
+$\sum_{(d, l) \in P^{\geq M}}{p_{d,l}} \geq 1$
+
+
