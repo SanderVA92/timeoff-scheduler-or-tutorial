@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 
+from src.utils.enums import Weekday
+
 
 class HolidayPeriod:
     __start_date: date
@@ -28,7 +30,9 @@ class HolidayPeriod:
         return all_days
 
     def __str__(self) -> str:
-        return f'{self.start_date()} - {self.end_date()}'
+        start_weekday = Weekday(self.start_date().isoweekday()).name
+        end_weekday = Weekday(self.end_date().isoweekday()).name
+        return f"{start_weekday[:3].capitalize()} {self.start_date()} - {end_weekday[:3].capitalize()} {self.end_date()}"
 
     def __repr__(self) -> str:
         return str(self)
