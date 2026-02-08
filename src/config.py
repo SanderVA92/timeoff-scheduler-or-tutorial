@@ -11,7 +11,9 @@ class Location(Enum):
 
 
 class ModelConfig:
-    PLANNING_PERIOD_START_DATE: date = date(2025, 1, 1)
+    PLANNING_YEAR: int = 2026
+    
+    PLANNING_PERIOD_START_DATE: date = date(PLANNING_YEAR, 1, 1)
     NUMBER_DAYS_IN_YEAR: int = 365
     PLANNING_PERIOD_END_DATE: date = PLANNING_PERIOD_START_DATE + timedelta(days=NUMBER_DAYS_IN_YEAR - 1)
 

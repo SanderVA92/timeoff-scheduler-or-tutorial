@@ -86,14 +86,17 @@ Set $P^{\geq M}$ represents all periods $p_{d, l}: l \geq M$. Then we can add th
 $\sum_{(d, l) \in P^{\geq M}}{p_{d,l}} \geq 1$
 
 
-## Installation
+## Installation and running the notebook
 
 ### Using uv (recommended)
 ```bash
 uv sync
+uv run --with jupyterlab jupyter lab notebooks/tutorial-demo.ipynb
 ```
 
 ### Using pip (alternative)
 ```bash
 pip install -r requirements.txt
-``` 
+pip install jupyterlab
+jupyter lab notebooks/tutorial-demo.ipynb
+```
