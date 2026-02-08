@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from enum import Enum
+from typing import Optional
 
 from src.utils.enums import Weekday
 
@@ -30,3 +31,6 @@ class ModelConfig:
 
     BASELINE_MARGINAL_VALUE: float = 1
     BONUS_MARGINAL_VALUE: float = 0.5
+
+    # More detailed requirements
+    AT_LEAST_ONE_PERIOD_WITH_LENGTH: Optional[int] = 14
