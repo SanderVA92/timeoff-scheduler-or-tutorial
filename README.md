@@ -7,7 +7,7 @@ During the workshop we covered subsequent steps of problem refinement, (initial)
 This repository contains
 - [datasets](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/datasets) with the public holidays for Berlin and Munich
 - some code to aid in implementation, focus on [domain modelling](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/mdl) and [visualization](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/plotting)
-- Jupyter notebook with [completely implemented version](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/notebooks/tutorial-demo.ipynb) which you can browse independently.
+- Jupyter notebook with [completely implemented version](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/tutorial-demo.ipynb) which you can browse independently.
    - Changing the model configuration, e.g. preferences and bonus preferrences is possible in the configuration file  (`src/config.py`)
    - Want to change the cost and/or utility calculation? Check `src/utils/calculators.py`
 
@@ -91,12 +91,12 @@ $\sum_{(d, l) \in P^{\geq M}}{p_{d,l}} \geq 1$
 ### Using uv (recommended)
 ```bash
 uv sync
-uv run --with jupyterlab jupyter lab notebooks/tutorial-demo.ipynb
+uv run --with jupyterlab jupyter lab tutorial-demo.ipynb
 ```
 
 ### Using pip (alternative)
 ```bash
 pip install -r requirements.txt
 pip install jupyterlab
-jupyter lab notebooks/tutorial-demo.ipynb
+jupyter lab tutorial-demo.ipynb
 ```

@@ -23,7 +23,7 @@ class ModelConfig:
 
     # Date-level utility parameters and preferences
     PREFERRED_WEEKDAYS_OFF: list[Weekday] = [Weekday.FRIDAY]
-    PREFERRED_DATES_OFF: list[date] = [date(2025, 6, 19)]
+    PREFERRED_DATES_OFF: list[date] = [date(2026, 6, 10)]
 
     # Period-level utility parameters and preferences
     MIN_TIME_OFF_TO_GET_VALUE: int = 3
