@@ -1,6 +1,8 @@
 # Operations Research problem-solving case
 
-This repository accompanies a workshop on Operations Research problem solving using an exact optimization model formulation. During the workshop we covered subsequent steps of problem refinement, (initial) model formulation, followed by the actual implementation in Jupyter notebooks. Within the notebooks, `PuLP` is used as wrapper to define the model and solve it with CBC, an open-source optimization model solver developed within the COIN-OR project.
+This repository accompanies a workshop on Operations Research problem solving using an exact optimization model formulation.
+
+During the workshop we covered subsequent steps of problem refinement, (initial) model formulation, followed by the actual implementation in Jupyter notebooks. Within the notebooks, `PuLP` is used as wrapper to define the model and solve it with CBC, an open-source optimization model solver developed within the COIN-OR project.
 
 This repository contains
 - [datasets](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/datasets) with the public holidays for Berlin and Munich
@@ -84,3 +86,14 @@ Set $P^{\geq M}$ represents all periods $p_{d, l}: l \geq M$. Then we can add th
 $\sum_{(d, l) \in P^{\geq M}}{p_{d,l}} \geq 1$
 
 
+## Installation
+
+### Using uv (recommended)
+```bash
+uv sync
+```
+
+### Using pip (alternative)
+```bash
+pip install -r requirements.txt
+``` 
