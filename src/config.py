@@ -22,17 +22,17 @@ class ModelConfig:
     HOLIDAY_BUDGET: int = 30
 
     # Date-level utility parameters and preferences
-    PREFERRED_WEEKDAYS_OFF: list[Weekday] = [Weekday.FRIDAY]
+    PREFERRED_WEEKDAYS_OFF: list[Weekday] = []
     PREFERRED_DATES_OFF: list[date] = [date(2026, 6, 10)]
 
     # Period-level utility parameters and preferences
-    MIN_TIME_OFF_TO_GET_VALUE: int = 3
-    PERIOD_LENGTH_GAIN_START: int = 4
+    MIN_TIME_OFF_TO_GET_VALUE: int = 4
+    PERIOD_LENGTH_GAIN_START: int = 5
     PERIOD_LENGTH_GAIN_CUTOFF: int = 20
-    DURATION_COMPONENT_SCALER: float = 1.1
+    DURATION_COMPONENT_SCALER: float = 1.2
 
     BASELINE_MARGINAL_VALUE: float = 1
-    BONUS_MARGINAL_VALUE: float = 0.5
+    BONUS_MARGINAL_VALUE: float = 0.6
 
     # More detailed requirements
     AT_LEAST_ONE_PERIOD_WITH_LENGTH: Optional[int] = 14
