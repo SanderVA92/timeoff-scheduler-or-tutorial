@@ -1,41 +1,46 @@
 # Operations Research problem-solving case
 
-This repository accompanies a workshop on Operations Research problem solving using an exact optimization model formulation.
+This repository demonstrates Operations Research problem-solving using an exact optimization model formulation. It covers the steps of problem refinement, model formulation, and implementation in a Jupyter notebook. `PuLP` is used as a wrapper to define the model and solve it with CBC, an open-source optimization solver from the COIN-OR project.  This repository has been used for:
+1. a company internal tutorial - A hands-on workshop covering the full OR workflow: problem understanding, mathematical modelling, and Python implementation.
+2. a talk for the [PyBerlin community on February 18th, 2026](https://www.meetup.com/pyberlin/events/312719130/) - description below
 
-During the workshop we covered subsequent steps of problem refinement, (initial) model formulation, followed by the actual implementation in Jupyter notebooks. Within the notebooks, `PuLP` is used as wrapper to define the model and solve it with CBC, an open-source optimization model solver developed within the COIN-OR project.
 
-This repository contains
-- [datasets](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/datasets) with the public holidays for Berlin and Munich
-- some code to aid in implementation, focus on [domain modelling](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/mdl) and [visualization](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/plotting)
-- Jupyter notebook with [completely implemented version](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/tutorial-demo.ipynb) which you can browse independently.
-   - Changing the model configuration, e.g. preferences and bonus preferrences is possible in the configuration file  (`src/config.py`)
-   - Want to change the cost and/or utility calculation? Check `src/utils/calculators.py`
+<details>
+<summary><strong>Talk - Maximum time off, minimum leave: solving the holiday equation with Python and math</strong></summary>
+
+Around the beginning of the year, German news sources publish tips on how to optimize your vacation by cleverly using Brückentage: taking a few strategic days of leave to connect weekends and public holidays into long breaks. But how can this be computed systematically? And how can it be tailored to your personal preferences?
+
+Operations Research (OR) and mathematical optimization are powerful but often underrepresented disciplines within the broader AI and analytics landscape. In this beginner-friendly talk, we treat holiday planning as a mathematical optimization problem. Using the question "How do I maximize my benefit from taking time off?", we will walk through the full process from problem formulation to a working Python solution.
+</details>
+
+## Repository contents
+
+- [datasets](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/datasets) with public holidays for Berlin and Munich
+- [domain modelling](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/mdl) and [visualization](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/tree/main/src/plotting) code
+- [Jupyter notebook](https://github.com/SanderVA92/timeoff-scheduler-or-tutorial/blob/main/tutorial-demo.ipynb) with the complete implementation
+   - Model configuration (preferences, bonus preferences): `src/config.py`
+   - Cost and utility calculations: `src/utils/calculators.py`
 
 ## Case study
 
 During the workshop, we used the problem below as a case study.
 
-> Julie and Trevor like planning things long ahead, one such thing: the days they take their
-time off during the year 2025.
+> F. likes planning things long ahead, one such thing: the days they take their time off during the year 2026.
 > 
-> Makes sense right?
+> Makes sense, right?
 >
-> Holidays are a scarce resource: we only have our yearly budget. J and T want to coordinate 
-and take off on the same days
+> Holidays are a scarce resource: we only have our yearly budget so we want to make the most out of it.
+>
+> Some of F’s considerations:
+> - He likes to have Fridays off
+> - He needs to do his share of covering school vacations (obligation)
+> - He likes to ski
+> - He really needs a 2-week vacation to go somewhere warm
+> - Being 3 days off? Not sufficient to rest
+> - The longer he is off, the better he rests
+> - More than 20 days in a row? Not even trying to get that approved
 > 
-> Both have their own **generic preferences**
-> - Julie has a preference for Mondays off
-> - Trevor likes Fridays more
->
-> and **preferred dates** for having time off
-> - 2025 June 19th: for the hangover after that wedding party on Wednesday
->
-> Additional considerations
-> - Being 2 days off? Not sufficient to rest
-> - The longer we are off, the better we rest
-> - More than 30 consecutive calendar days away? Not even trying to get that approved
-> 
-> ... oh and let’s be opportunistic: weekends and holidays do not “cost” us a day
+> ... oh and let’s be opportunistic: weekends and holidays come for free
 
 ## Modelling approach and optimization model formulation
 
@@ -78,8 +83,14 @@ We can only get the value of a specific day once, and hence it does not make sen
 
 $\sum_{(d, l) \in P_{\delta}}{x_{d,l}} \leq 1$
 
-#### [optional] Constraint 3: longer period required
-To illustrate that we can extend the model with additional constraints to come closer to our own preferences, a third constraint states that we should have at least one period with $M$ consecutive days off. 
+#### [optional] Constraint 3: must-have dates off
+We can enforce that specific dates must be taken off. For each must-have date $\delta$, at least one period covering that date must be selected.
+
+$\sum_{(d, l) \in P_{\delta}}{p_{d,l}} \geq 1 \quad \forall \delta \in \text{MustHaveDates}$
+
+
+#### [optional] Constraint 4: longer period required
+To illustrate that we can extend the model with additional constraints to come closer to our own preferences, a third constraint states that we should have at least one period with $M$ consecutive days off.
 
 Set $P^{\geq M}$ represents all periods $p_{d, l}: l \geq M$. Then we can add the following constraint:
 
