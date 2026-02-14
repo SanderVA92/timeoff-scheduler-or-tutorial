@@ -47,7 +47,7 @@ class CalculateUtility:
         if duration_in_days < min_duration:
             return 0
 
-        # Above the minimum holiday period length, we accumulate an exponentially increasing value for the time off.
+        # Above the minimum holiday period length, we accumulate a linearly-increasing value for the time off.
         if duration_in_days > max_duration:
             additional_value = (
                 max_duration - min_duration + 1

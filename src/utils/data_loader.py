@@ -25,5 +25,11 @@ class CSVDataLoader:
 
         df_public_holidays.sort_values(by="Date", inplace=True)
         df_public_holidays["Date"] = pd.to_datetime(df_public_holidays["Date"]).dt.date
+        df_public_holidays = self.__add_weekday_column(df_public_holidays)
 
         return df_public_holidays
+
+    @staticmethod
+    def __add_weekday_column(df: pd.DataFrame, date_column: str = "Date") -> pd.DataFrame:
+        df["Weekday"] = pd.to_datetime(df[date_column]).dt.day_name()
+        return df

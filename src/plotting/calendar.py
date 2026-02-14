@@ -10,7 +10,7 @@ import matplotlib.patches as mpatches
 __COLORMAP = colors.ListedColormap(['red', 'yellow', 'green'])
 
 
-def holiday_calendar_plot(public_holidays: list[date], weekend_days: list[date], days_off: list[date]) -> None:
+def holiday_calendar_plot(public_holidays: list[date], weekend_days: list[date], days_off: list[date]):
     colors_to_use = []
 
     public_holiday_series = pd.Series(1, index=public_holidays)
@@ -30,7 +30,7 @@ def holiday_calendar_plot(public_holidays: list[date], weekend_days: list[date],
     combined = pd.concat([public_holiday_series, days_off_series, weekend_days_series])
     combined.index = combined.index.astype('datetime64[ns]')
 
-    calplot.calplot(
+    fig, ax = calplot.calplot(
         combined,
         cmap=colors.ListedColormap(colors_to_use),
         linecolor='black',
@@ -46,4 +46,4 @@ def holiday_calendar_plot(public_holidays: list[date], weekend_days: list[date],
 
     plt.legend(handles=[public_holiday_patch, weekend_days_patch, days_off_patch], loc='right', bbox_to_anchor=(1.22, 1))
 
-    plt.savefig('calendar_plot.png')
+    return fig, ax
