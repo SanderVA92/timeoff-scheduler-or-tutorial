@@ -100,6 +100,8 @@ class CalculateUtility:
         if period.duration() < ModelConfig.MIN_TIME_OFF_TO_GET_VALUE:
             return 0
 
-        summed_marginal = CalculateUtility.summed_marginal_value_for_period(period, preferred_weekdays_off, preferred_dates_off)
+        summed_marginal = CalculateUtility.summed_marginal_value_for_period(
+            period, preferred_weekdays_off, preferred_dates_off
+        )
         period_based = CalculateUtility.duration_dependent_component(period.duration())
         return summed_marginal + period_based
