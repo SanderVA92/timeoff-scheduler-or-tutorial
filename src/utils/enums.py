@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, IntEnum
 
 
 class Weekday(Enum):
@@ -9,3 +9,10 @@ class Weekday(Enum):
     FRIDAY = 5
     SATURDAY = 6
     SUNDAY = 7
+
+
+class DayType(IntEnum):
+    PUBLIC_HOLIDAY = 1
+    WEEKEND = 2
+    DAY_OFF = 3
+    REGULAR = 0
