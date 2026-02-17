@@ -2,7 +2,9 @@
 
 This repository demonstrates Operations Research problem-solving using an exact optimization model formulation. It covers the steps of problem refinement, model formulation, and implementation in a Jupyter notebook. `PuLP` is used as a wrapper to define the model and solve it with CBC, an open-source optimization solver from the COIN-OR project.  This repository has been used for:
 1. a company internal tutorial - A hands-on workshop covering the full OR workflow: problem understanding, mathematical modelling, and Python implementation.
-2. a talk for the [PyBerlin community on February 18th, 2026](https://www.meetup.com/pyberlin/events/312719130/) - description below
+2. a talk for the [PyBerlin community on February 18th, 2026](https://www.meetup.com/pyberlin/events/312719130/)
+   - [slides](./docs/20260218_PyBerlin_MaximumTimeOffMinimumLeave_slides.pdf)
+   - description below
 
 
 <details>
